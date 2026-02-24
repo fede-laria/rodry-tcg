@@ -1,5 +1,6 @@
 {
   "name": "tcg",
+  "homepage": "https://fede-laria.github.io/rodry-tcg/",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -7,10 +8,13 @@
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist"
   },
   "dependencies": {
     "dom-to-image": "^2.6.0",
+    "gh-pages": "^6.3.0",
     "html2canvas": "^1.4.1",
     "react": "^19.2.0",
     "react-dom": "^19.2.0"
