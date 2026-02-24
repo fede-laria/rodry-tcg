@@ -98,7 +98,8 @@ function CardPreview(props) {
             <div className="card-preview-full-image"
                 style={{
                     clipPath: "inset(0 13% 0 0)",
-                    backgroundImage: 'url(src/assets/img/marco/linea/marco-linea-' + props.faction + '.png)'
+                    backgroundImage: 'url(src/assets/img/marco/linea/marco-linea-hivebreed.png)'
+                    // backgroundImage: 'url(src/assets/img/marco/linea/marco-linea-' + props.faction + '.png)'
                 }}
             ></div>
             <div className="card-preview-full-image"
