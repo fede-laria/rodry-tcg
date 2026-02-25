@@ -104,7 +104,7 @@ button:focus-visible {
 
 .btn-guardar-container {
   display: flex;
-  gap: 1rem;
+  gap: .3rem;
 }
 
 .btn-guardar {
@@ -438,4 +438,24 @@ textarea {
   top: -0.12rem;
   left: .1rem;
   text-shadow: none;
+}
+
+@media print {
+  html, body, #root, :root {
+    background-color: white;
+  }
+
+  .card-builder-data, .btn-main-container {
+    display: none;
+  }
+
+  .card-preview-container {
+    border-radius: 0;
+    box-shadow: none;
+  }
+}
+
+@page {
+  size: A4;
+  margin: none;
 }

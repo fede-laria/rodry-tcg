@@ -187,7 +187,7 @@ function CardBuilder() {
         let card = document.getElementById("card-preview-container");
         card.style.borderRadius = "0px";
 
-        domtoimage.toJpeg(card, {
+        domtoimage.toPng(card, {
             height: card.offsetHeight * scale,
             width: card.offsetWidth * scale,
             style: {
@@ -199,7 +199,7 @@ function CardBuilder() {
         })
         .then(function (dataUrl) {
             var link = document.createElement('a');
-            link.download = (title.length > 0 ? title : "Carta Sin Nombre") + '.jpeg';
+            link.download = (title.length > 0 ? title : "Carta Sin Nombre") + '.png';
             link.href = dataUrl;
             link.click();
         });
@@ -335,6 +335,7 @@ function CardBuilder() {
                     <p className="tooltip">
                         Códigos para formato automático:<br />
                         <span className="word-spacing-big">Stats: !VIDA !MANA !ATK !DEF !PUN !VEL</span><br />
+                        <span className="word-spacing-big">Cartas: %CRI %CON %MAL etc...</span><br />
                         <span className="word-spacing-big">Facciones: $HIV $DRA $KOR etc...</span><br />
                         <span className="word-spacing-big">Razas/Clases: &HUM &BES &GUE &TAN etc...</span><br />
                         <span className="word-spacing-big">Elementos: #TIE #FUE #AGU etc...</span><br />
@@ -369,6 +370,11 @@ function CardBuilder() {
                             onClick={() => takeCardScreenshot()}
                         >Guardar Imagen</button>
 
+                        <button
+                            className={"btn-guardar" + (areThereErrors() ? " error" : " ")}
+                            onClick={() => window.print()}
+                        >Imprimir</button>
+
                         <p className="error-p">{errorText}</p>
                     </div>
                     
@@ -379,7 +385,7 @@ function CardBuilder() {
                 </div>
                 
             </div>
-            <div>
+            <div className="card-builder-data">
                 {type === "criatura" &&
                 <label className="label-half">
                     <img className="card-builder-icon" src={'src/assets/img/stats/vida.png'} />

@@ -1,0 +1,1 @@
+export { default as Drask } from './img/facciones/drask.png';
