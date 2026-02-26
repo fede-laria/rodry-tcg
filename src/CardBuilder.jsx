@@ -376,7 +376,7 @@ function CardBuilder() {
                 {/* Raza */}
                 <label className="label-half">
                     {race != "ninguna" &&
-                        <img className="card-builder-icon type-icon" src={'src/assets/svg/razas/' + race + '.svg'} />
+                        <img className="card-builder-icon type-icon" src={cData.razas[race].img} />
                     }
                     Raza: 
                     <select
@@ -396,7 +396,7 @@ function CardBuilder() {
                 {/* Clase */}
                 <label className="label-half">
                     {cclass != "ninguna" &&
-                        <img className="card-builder-icon type-icon" src={'src/assets/svg/clases/' + cclass + '.svg'} />
+                        <img className="card-builder-icon type-icon" src={cData.clases[cclass].img} />
                     }
                     Clase: 
                     <select
