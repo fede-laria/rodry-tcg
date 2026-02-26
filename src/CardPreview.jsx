@@ -1,78 +1,27 @@
-import {
-    Drask
-} from './assets/images'
+import { default as imgPlaceholder } from './assets/img/base/placeholder.jpg';
+import { cData, getBgUrl } from './c-data';
 
 function CardPreview(props) {
-    function getRaceHex(rr) {
-        switch(rr) {
-            case "insectoide": return "#b4a2a2";
-            case "reptiliano": return "#54b633";
-            case "humano": return "#b9b190";
-            case "bestia": return "#a9390a";
-            default: return "#c7c7c7";
-        }
-    }
-
-    function getClassHex(cc) {
-        switch(cc) {
-            case "berserker": return "#a71b2a";
-            case "asesino": return "#900072";
-            case "tanque": return "#b2625e";
-            case "support": return "#4a8857";
-            case "mago": return "#5b7acc";
-            case "guerrero": return "#b4aab3";
-            default: return "#c7c7c7";
-        }
-    }
-
-    function getSpellAttHex(a) {
-        switch(a) {
-            case "rapido": return "#ffc477";
-            case "ofensivo": return "#db5f40";
-            case "restrictivo": return "#9b6bf5";
-            case "unico": return "#fdff81";
-            default: return "#c7c7c7";
-        }
-    }
-
-    function getTextBgSrc() {
-        let src = "";
-        switch(props.type) {
-            case "criatura":
-                src = "criatura";
-                break;
-            case "conjuro": case "maldicion":
-                src = "conjuro";
-                break;
-            default:
-                src = "equipamiento";
-                break;
-        }
-        src = "url(src/assets/img/info-fondo/info-fondo-" + src + ".png)";
-        return src;
-    }
-
     return (
         <div className="card-preview-container" id="card-preview-container">
-            <div className="card-preview-full-image" style={{backgroundImage: "url( " + Drask + ")", color: "red"}}></div>
-
+            {/* Título */}
             <h3 className="card-text card-title">{props.title}</h3>
-
+            {/* Imagen placeholder */}
             <img
                 className="card-preview-full-image"
-                src={props.image ? props.image : "src/assets/img/base/placeholder.jpg"}
+                src={props.image ? props.image : imgPlaceholder}
             ></img>
-
-            {props.type === "criatura" && <div className="card-text stat stat-health">{props.health}</div>}
+            {/* Stats */}
+            {props.type === "criatura" && <div className="card-text stat stat-vida">{props.vida}</div>}
             {props.type === "criatura" && <div className="card-text stat stat-mana">{props.mana}</div> }
-            {props.type === "criatura" && <div className="card-text stat stat-attack">{props.attack}</div>}
-            {props.type === "criatura" && <div className="card-text stat stat-accuracy">{props.accuracy}</div>}
-            {props.type === "criatura" && <div className="card-text stat stat-speed">{props.speed}</div>}
-            {props.type === "criatura" && <div className="card-text stat stat-defense">{props.defense}</div>}
+            {props.type === "criatura" && <div className="card-text stat stat-ataque">{props.ataque}</div>}
+            {props.type === "criatura" && <div className="card-text stat stat-punteria">{props.punteria}</div>}
+            {props.type === "criatura" && <div className="card-text stat stat-velocidad">{props.velocidad}</div>}
+            {props.type === "criatura" && <div className="card-text stat stat-defensa">{props.defensa}</div>}
             {(props.type === "conjuro" || props.type === "maldicion") && 
                 <div className="card-text stat stat-mana stat-mana-main">{props.mana}</div>
             }
-
+            {/* Descripción */}
             <div
                 className="card-text card-description-container"
                 style={{
@@ -81,83 +30,77 @@ function CardPreview(props) {
             >
                 <div className="card-description" dangerouslySetInnerHTML={{__html:props.description}}></div>
             </div>
-
+            {/* Marco e infoFondo de tipo de carta */}
             <div
-                className="card-preview-full-image card-preview-info-fondo"
+                className="card-preview-full-image"
                 style={{
-                    backgroundImage: getTextBgSrc()
+                    backgroundImage: getBgUrl(cData.tiposCarta[props.type].imgInfoFondo)
                 }}
             ></div>
-            <div className={"card-preview-full-image card-preview-info-fondo card-preview-info-fondo-" + props.type}></div>
             <div
-                className="card-preview-full-image card-preview-marco"
+                className="card-preview-full-image"
                 style={{
-                    backgroundImage: "url(src/assets/img/marco/marco-" + props.type + ".png)"
+                    backgroundImage: getBgUrl(cData.tiposCarta[props.type].img)
                 }}
             ></div>
-            {/* <div className="card-preview-full-image card-preview-marco-linea"
-                style={{
-                    backgroundImage: 'url(src/assets/img/marco/linea/marco-linea-' 
-                                     + props.faction + '-' + props.elements.length + 'e.png)'
-                }}
-            ></div> */}
+            {/* Línea fina de marco */}
             <div className="card-preview-full-image"
                 style={{
                     clipPath: "inset(0 13% 0 0)",
-                    backgroundImage: 'url(src/assets/img/marco/linea/marco-linea-hivebreed.png)'
-                    // backgroundImage: 'url(src/assets/img/marco/linea/marco-linea-' + props.faction + '.png)'
+                    backgroundImage: getBgUrl(cData.facciones.hivebreed.imgLinea)
+                    // backgroundImage: getBgUrl(cData.facciones[props.faction].imgLinea)
                 }}
             ></div>
             <div className="card-preview-full-image"
                 style={{
                     clipPath: "inset(" + (9 + 5.5 * props.elements.length).toString() + "% 0 0 77%)",
-                    backgroundImage: 'url(src/assets/img/marco/linea/marco-linea-hivebreed.png)'
-                    // backgroundImage: 'url(src/assets/img/marco/linea/marco-linea-' + props.faction + '.png)'
+                    backgroundImage: getBgUrl(cData.facciones.hivebreed.imgLinea)
+                    // backgroundImage: getBgUrl(cData.facciones[props.faction].imgLinea)
                 }}
             ></div>
+            {/* Trama */}
             <div
-                className={
-                    "card-preview-full-image" + (props.type === "maldicion" ? " card-preview-trama-invertido" : "")
-                }
+                className="card-preview-full-image"
                 style={{
-                    backgroundImage: 'url(src/assets/img/marco/tramas/' 
-                    + props.faction + (props.type === "maldicion" ? "-negativo" : "") + '.png)'
+                    backgroundImage: getBgUrl(props.type === "maldicion" 
+                        ? cData.facciones[props.faction].imgTramaN : cData.facciones[props.faction].imgTrama)
                 }}
             ></div>
-
+            {/* Facción */}
             <div className="card-preview-full-image card-preview-faccion"
                 style={{
-                    backgroundImage: 'url(src/assets/img/facciones/' + props.faction + '.png)'
+                    backgroundImage: getBgUrl(cData.facciones[props.faction].imgCarta)
                 }}
             ></div>
 
             <div className="card-preview-types-container">
+                {/* Raza */}
                 {props.race != "ninguna" &&
                     <div className="card-preview-type card-preview-race">
-                        <img className="card-preview-type-icon" src={'src/assets/svg/razas/' + props.race + '.png'} />
+                        <img className="card-preview-type-icon" src={cData.razas[props.race].img} />
                         {props.type === "criatura" &&
                         <p
                             className="card-type-name"
                             style={{
-                                color: getRaceHex(props.race)
+                                color: (props.race != "ninguna") ? cData.razas[props.race].color : "#FFFFFF"
                             }}
                         >{props.race}</p>}
                     </div>
                 }
-
+                {/* Clase */}
                 {props.cclass != "ninguna" &&
                     <div className="card-preview-type card-preview-class">
-                        <img className="card-preview-type-icon" src={'src/assets/svg/clases/' + props.cclass + '.png'} />
+                        <img className="card-preview-type-icon" src={cData.clases[props.cclass].img} />
                         {props.type === "criatura" &&
                         <p
                             className="card-type-name"
                             style={{
-                                color: getClassHex(props.cclass)
+                                color: (props.cclass != "ninguna") ? cData.clases[props.cclass].color : "#FFFFFF"
                             }}
                         >{props.cclass}</p>}
                     </div>
                 }
-
+                {/* Atributos de conjuro */}
                 {(props.type === "conjuro" || props.type === "maldicion" || props.type === "accion") &&
                     <div className="card-preview-atts-container">
                         {(props.spellAtts.length > 0 && (props.cclass != "ninguna" || props.race != "ninguna")) &&
@@ -168,7 +111,7 @@ function CardPreview(props) {
                                 <p
                                     className="card-type-name"
                                     style={{
-                                        color: getSpellAttHex(att)
+                                        color: cData.cAtributos[att].color
                                     }}
                                 >{att}</p>
                             </div>
@@ -176,17 +119,17 @@ function CardPreview(props) {
                     </div>
                 }
             </div>
-
+            {/* Elementos */}
             <div className="card-preview-elements-container">
                 {props.elements.map(function(el, i) {
-                    return <img className="card-preview-element" src={'src/assets/img/elementos/' + el + '.png'} />
+                    return <img className="card-preview-element" src={cData.elementos[el].img} />
                 })}
             </div>
 
             <div
                 className="card-preview-type-container"
                 style={{
-                    backgroundColor: getRaceHex(props.race)
+                    backgroundColor: (props.race != "ninguna") ? cData.razas[props.race].color : "#FFFFFF"
                 }}
             >
                 <div>

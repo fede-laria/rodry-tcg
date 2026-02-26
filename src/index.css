@@ -168,7 +168,7 @@ button:focus-visible {
   text-wrap: nowrap;
 }
 
-.stat-health {
+.stat-vida {
   text-align: center;
   letter-spacing: -0.4rem;
   top: 57%;
@@ -194,7 +194,7 @@ button:focus-visible {
   font-size: 4.8rem;
 }
 
-.stat-attack, .stat-accuracy, .stat-speed, .stat-defense {
+.stat-ataque, .stat-punteria, .stat-velocidad, .stat-defensa {
   text-align: right;
   letter-spacing: -0.4rem;
   font-weight: 500;
@@ -202,22 +202,22 @@ button:focus-visible {
   width: 20%;
 }
 
-.stat-attack {
+.stat-ataque {
     top: 83%;
     right: 11.7%;
 }
 
-.stat-defense {
+.stat-defensa {
     top: 89.5%;
     right: 11.7%;
 }
 
-.stat-accuracy {
+.stat-punteria {
     top: 71.6%;
     right: 27.5%;
 }
 
-.stat-speed {
+.stat-velocidad {
     top: 75.8%;
     right: 21.5%;
 }
