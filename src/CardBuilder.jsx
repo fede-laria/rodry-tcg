@@ -56,7 +56,7 @@ function CardBuilder() {
                 let itemName = itemsList[z][0];
                 let itemData = itemsList[z][1];
                 let nameFirst = (ar[0] === "stats");
-                let iconImage = Object.hasOwn(itemData, "img") ? itemData.img : "";
+                let iconImage = Object.hasOwn(itemData, "img") ? (ar[0] != "tiposCarta" && itemData.img) : "";
                 let abbreviation = (Object.hasOwn(itemData, "keyword") ? itemData.keyword : itemName.substring(0,3)).toUpperCase();
                 let keyword = syToUse + abbreviation;
                 let nameToShow = Object.hasOwn(itemData, "shownName") ? itemData.shownName : itemName;
@@ -114,8 +114,8 @@ function CardBuilder() {
         if (shownName === name) { shownName = uppercaseFirstLetter(shownName); }
 
         let spanName = "<span class='description-stat " + name + "'>" + shownName  + "</span>";
-        let img = (iconImage != "") ? "<img class='description-icon " + name + "' src='" + iconImage + "' />" : "";
-        let space = "<span class='description-icon-space'></span>";
+        let img = (iconImage.length > 0) ? "<img class='description-icon " + name + "' src='" + iconImage + "' />" : "";
+        let space = (iconImage.length > 0) ? "<span class='description-icon-space'></span>" : "";
         let spanPlusImg = (nameFirst ? (spanName + space + img) : (img + space + spanName));
 
         return text.replaceAll(
